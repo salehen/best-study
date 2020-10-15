@@ -35,7 +35,7 @@
                          <div class="form-group">
                              <label class="col-sm-2 control-label">Section</label>
                              <div class="col-sm-10">
-                                 <select name="section" id="section" class="form-control section">
+                                 <select name="section" id="section" class="form-control examSection">
                                      <option value="" disabled selected>Select Class First</option>
                                  </select>
                                  <span class="ar-danger"> <?php echo form_error('section') ?></span>
@@ -44,15 +44,21 @@
                          <div class="form-group">
                              <label class="col-sm-2 control-label">Subject</label>
                              <div class="col-sm-10">
-                                 <select name="subject" id="subject" class="form-control class">
+                                 <select name="subject" id="subject" class="form-control subject">
                                      <option value="" disabled selected>Select Subject</option>
-                                     <?php
-                                        foreach ($subject as $cl) {
-                                        ?>
-                                         <option value="<?php echo $cl->id ?>" <?php echo  set_select('subject', $cl->id, false); ?>><?php echo $cl->name ?></option>
-                                     <?php } ?>
+                                     
                                  </select>
                                  <span class="ar-danger"> <?php echo form_error('subject') ?></span>
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-sm-2 control-label">Teacher</label>
+                             <div class="col-sm-10">
+                                 <select name="teacher" id="teacher" class="form-control teacher">
+                                     <option value="" disabled selected>Select Teacher</option>
+                                     
+                                 </select>
+                                 <span class="ar-danger"> <?php echo form_error('teacher') ?></span>
                              </div>
                          </div>
                          <div class="form-group">

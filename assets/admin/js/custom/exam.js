@@ -27,6 +27,7 @@ $("document").ready(function () {
                             rtl += "<td>" + response[index]['cname'] + "</td>";
                             rtl += "<td>" + response[index]['sec_name'] + "</td>";
                             rtl += "<td>" + response[index]['sub_name'] + "</td>";
+                            rtl += "<td>" + response[index]['tname'] + "</td>";
                             rtl += "<td>" + response[index]['etname'] + "</td>";
                             rtl += "<td>" + response[index]['date'] + "</td>";
                             rtl += "<td>" + response[index]['time'] + "</td>";
@@ -240,6 +241,46 @@ $("document").ready(function () {
             });
         }
     });
+
+    $(".examSection").change(function () {
+		var sID = Number($(this).val());
+		// alert(classID)
+		if (sID) {
+			$.ajax({
+				type: "post",
+				url: $("meta[name='url']").attr("content") + "admin/api/load-exam-subject",
+				data: {
+					"sID": sID 
+				},
+				success: function (data) {
+					//console.log(data)
+					$("#subject").html('<option disabled selected>Select Subject</option>'+data)
+				}
+			});
+		} else {
+			$("#subject").html('<option>Select Section First</option>')
+		}
+    });
+    
+    $("#subject").change(function () {
+		var sID = Number($(this).val());
+		// alert(classID)
+		if (sID) {
+			$.ajax({
+				type: "post",
+				url: $("meta[name='url']").attr("content") + "admin/api/load-exam-teacher",
+				data: {
+					"sID": sID 
+				},
+				success: function (data) {
+					//console.log(data)
+					$("#teacher").html('<option disabled selected>Select Teacher</option>'+data)
+				}
+			});
+		} else {
+			$("#teacher").html('<option>Select Subject First</option>')
+		}
+	});
 
 
 });

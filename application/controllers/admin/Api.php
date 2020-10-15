@@ -329,12 +329,13 @@ class Api extends CI_Controller
 		$sid = $this->input->post('sid', true);
 		$data = [];
 		if ($sid) {
-			$select = 'exam.*, exam_type.name as etname, sections.name as sec_name, subjects.name as sub_name, class.name as cname';
+			$select = 'exam.*, exam_type.name as etname, sections.name as sec_name, subjects.name as sub_name, class.name as cname, teachers.name as tname';
 			$join = [
 				'exam_type' => 'exam_type.id = exam.exam_type_id',
 				'sections' => 'sections.id = exam.section_id',
 				'subjects' => 'subjects.id = exam.subject_id',
-				'class' => 'class.id = sections.class_id'
+				'class' => 'class.id = sections.class_id',
+				'teachers' => 'teachers.id = exam.teacher_id'
 			];
 			$result = $this->om->view($select, 'exam', ['exam.section_id' => $sid], '', '', $join);
 			if ($result) {
@@ -403,6 +404,40 @@ class Api extends CI_Controller
 		}
 
 		echo json_encode($data);
+	}
+
+	public function examSubject()
+	{
+		$sid = $this->input->post('sID', true);
+		if ($sid) {
+			$result = $this->om->view('routine.subject_id as sid, subjects.name as sname', 'routine', ['routine.section_id' => $sid], '', '', ['subjects' => 'subjects.id = routine.subject_id']);
+			if ($result) {
+				$sec = '';
+				foreach ($result as $v) {
+					$sec .= "<option value=" . $v->sid . ">" . $v->sname . "</option>";
+				}
+				echo $sec;
+			} else {
+				echo "<p>No Section.</p>";
+			}
+		}
+	}
+
+	public function examTeacher()
+	{
+		$sid = $this->input->post('sID', true);
+		if ($sid) {
+			$result = $this->om->view('routine.teacher_id as tid, teachers.name as tname', 'routine', ['routine.subject_id' => $sid], '', '', ['teachers' => 'teachers.id = routine.teacher_id']);
+			if ($result) {
+				$sec = '';
+				foreach ($result as $v) {
+					$sec .= "<option value=" . $v->tid . ">" . $v->tname . "</option>";
+				}
+				echo $sec;
+			} else {
+				echo "<p>No Section.</p>";
+			}
+		}
 	}
 
 

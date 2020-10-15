@@ -379,11 +379,11 @@ class Dashboard extends CI_Controller
 	public function addExam()
 	{
 		$data['js'] = [
-			'assets/js/custom/myjs'
+			'assets/js/custom/myjs',
+			'assets/admin/js/custom/exam'
 		];
 		$this->load->helper('form');
 		$data['class'] = $this->om->view('*', 'class');
-		$data['subject'] = $this->om->view('*', 'subjects');
 		$data['exam_type'] = $this->om->view('*', 'exam_type');
 		$data['title'] = 'Add Exam';
 		$data['pages'] = $this->load->view('admin/add-exam', $data, TRUE);
@@ -445,6 +445,15 @@ class Dashboard extends CI_Controller
 				'greater_than_equal_to' => '* Subject Must Be Assign.'
 			)
 		);
+		$this->form_validation->set_rules(
+			'teacher',
+			'teacher',
+			'required|greater_than_equal_to[1]',
+			array(
+				'required' => '* Teacher Required',
+				'greater_than_equal_to' => '* Teacher Must Be Assign.'
+			)
+		);
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['js'] = [
@@ -459,6 +468,7 @@ class Dashboard extends CI_Controller
 			$this->load->view('admin/dashboard', $data);
 		} else {
 			$edata = [
+				'teacher_id' => $this->input->post('teacher', true),
 				'subject_id' => $this->input->post('subject', true),
 				'exam_type_id' => $this->input->post('exam_type', true),
 				'section_id' => $this->input->post('section', true),

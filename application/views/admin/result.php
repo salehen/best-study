@@ -6,7 +6,7 @@
      				<div class="tab-content-details shadow-reset text-left">
      					<div class="row">
      						<div class="col-md-12 text-center page-header mt-b-30">
-     							<h1>To See Students List Select Class and Section</h1>
+     							<h1>To See Students Result Select Class and Section</h1>
      						</div>
      						<div class="col-md-6 mt-4" id="">
      							<label for="class">Select Class</label>

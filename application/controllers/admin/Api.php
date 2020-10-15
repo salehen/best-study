@@ -427,7 +427,7 @@ class Api extends CI_Controller
 	{
 		$sid = $this->input->post('sID', true);
 		if ($sid) {
-			$result = $this->om->view('routine.teacher_id as tid, teachers.name as tname', 'routine', ['routine.subject_id' => $sid], '', '', ['teachers' => 'teachers.id = routine.teacher_id']);
+			$result = $this->om->view('routine.teacher_id as tid, teachers.name as tname', 'routine', ['routine.subject_id' => $sid], '', '', ['teachers' => 'teachers.id = routine.teacher_id'], 'routine.teacher_id');
 			if ($result) {
 				$sec = '';
 				foreach ($result as $v) {

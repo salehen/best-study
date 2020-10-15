@@ -49,6 +49,7 @@
                                      <th>Class</th>
                                      <th>Section</th>
                                      <th>Subject</th>
+                                     <th>Teacher</th>
                                      <th>Exam Type</th>
                                      <th>Exam Date</th>
                                      <th>Start Time</th>

@@ -110,6 +110,8 @@ $route['admin/api/load-exam'] = 'admin/api/loadExam';
 $route['admin/api/load-exam-result'] = 'admin/api/loadExamResult';
 
 $route['admin/api/exam'] = 'admin/api/exam';
+$route['admin/api/load-exam-subject'] = 'admin/api/examSubject';
+$route['admin/api/load-exam-teacher'] = 'admin/api/examTeacher';
 
 //Admin Dashboard route
 $route['dashboard'] = 'admin/dashboard';

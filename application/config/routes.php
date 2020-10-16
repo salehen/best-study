@@ -109,6 +109,8 @@ $route['admin/api/load-routine'] = 'admin/api/loadRoutine';
 $route['admin/api/load-exam'] = 'admin/api/loadExam';
 $route['admin/api/load-exam-result'] = 'admin/api/loadExamResult';
 
+$route['admin/api/exam-mark-input'] = 'admin/api/examMarkInput';
+
 $route['admin/api/exam'] = 'admin/api/exam';
 $route['admin/api/load-exam-subject'] = 'admin/api/examSubject';
 $route['admin/api/load-exam-teacher'] = 'admin/api/examTeacher';
@@ -143,6 +145,7 @@ $route['dashboard/add-exam/check'] = 'admin/dashboard/addExamCheck';
 
 $route['dashboard/result'] = 'admin/result';
 $route['dashboard/add-result'] = 'admin/result/addResult';
+$route['dashboard/exam-marks-save'] = 'admin/result/examMarkSave';
 
 $route['dashboard/routine'] = 'admin/dashboard/routine';
 $route['dashboard/add-routine'] = 'admin/dashboard/addRoutine';

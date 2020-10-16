@@ -8,6 +8,12 @@
      						<div class="col-md-12 text-center page-header mt-b-30">
      							<h1>To See Students Result Select Class and Section</h1>
      						</div>
+     						<?php
+								$msg = $this->session->flashdata('msg');
+								if (isset($msg) && $msg) {
+									echo "<span class='alert-success' align='center'><p>$msg</p></span><br>";
+								}
+								?>
      						<div class="col-md-6 mt-4" id="">
      							<label for="class">Select Class</label>
      							<select name="class" id="class" class="form-control class">
@@ -31,12 +37,6 @@
      		</div>
      		<div class="row">
      			<div class="col-md-12" id="a-info">
-     				<?php
-						$msg = $this->session->flashdata('msg');
-						if (isset($msg) && $msg) {
-							echo "<span class='alert-success' align='center'><p>$msg</p></span><br>";
-						}
-						?>
      				<div id="aSearch" class="form-inline col-md-12 mt-10 p-0" style="display: none; width:100%">
      					<label for="mySearch" class="col-md-4 form-control">Search Student : </label>
      					<input id="mySearch" type="text" placeholder="Search.." class="col-md-8 form-control">

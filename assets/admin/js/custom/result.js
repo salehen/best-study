@@ -1,23 +1,95 @@
 $("document").ready(function () {
+
+    $('body').on('click', '.marksInput', function (e) {
+        e.preventDefault();
+        var examID = Number($(this).val());
+        console.log(examID);
+        if (examID) {
+            $.ajax({
+                type: "post",
+                url: $("meta[name='url']").attr("content") + "admin/api/exam-mark-input",
+                data: {
+                    'examID': examID
+                },
+                success: function (response) {
+                    // console.log(response);
+                    if (response) {
+                        response = JSON.parse(response);
+                        rtl = "";
+                        $(".mofiz").remove();
+                        $(".no-data").remove();
+                        for (var index in response) {
+                            if (response[index]['gender'] == 1) {
+                                gender = 'Male';
+                            } else if (response[index]['gender'] == 2) {
+                                gender = 'Female';
+                            } else {
+                                gender = 'Other';
+                            }
+                            rtl += "<tr class='mofiz' salehen='" + response[index]['sid'] + "'>";
+                            rtl += "<td>" + response[index]['sid'] + "</td>";
+                            rtl += "<td>" + response[index]['cname'] + "</td>";
+                            rtl += "<td>" + response[index]['sec_name'] + "</td>";
+                            rtl += "<td>" + response[index]['sub_name'] + "</td>";
+                            rtl += "<td>" + response[index]['sname'] + "</td>";
+                            rtl += "<td>" + gender + "</td>";
+                            rtl += "<td>" + response[index]['etname'] + "</td>";
+                            rtl += "<td>" + response[index]['date'] + "</td>";
+                            rtl += `<td>
+                                        <input type="number" name="marks[]" class="form-control" >
+                                        <input type="hidden" name="studentID[]" value="`+ response[index]['sid'] + `"> 
+                                        <input type="hidden" name="examID" value="`+ response[index]['id'] + `"> 
+                                        <input type="hidden" name="status" value="`+ response[index]['status'] + `"> 
+									</td>`;
+                            rtl += "</tr>";
+                        }
+                        $('#a-info').hide();
+                        $('#inputForm').show();
+                        $("#iftbody").append(rtl);
+                    } else {
+                        $('#errorMsg').show();
+                        $(".mofiz").remove();
+                        $(".no-data").remove();
+                        $("#errorMsg").append("<p class='alert-success text-center no-data'><b>No Student Found</b></p>");
+                    }
+                }
+            });
+        } else {
+            $('#errorMsg').show();
+            $(".mofiz").remove();
+            $(".no-data").remove();
+            $("#errorMsg").append("<p class='alert-success text-center no-data'><b>No Student Found</b></p>");
+        }
+    })
+
+
+    $(".mySearch").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#iftbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+
     $("#section").change(function () {
-		var classID = Number($(this).val());
-		alert(classID)
-		if (classID) {
-			$.ajax({
-				type: "post",
-				url: $("meta[name='url']").attr("content") + "admin/api/load-exam",
-				data: {
-					"sid": classID 
-				},
-				success: function (data) {
-					//console.log(data)
-					$("#exam").html('<option disabled selected>Select Exam</option>'+data)
-				}
-			});
-		} else {
-			$("#exam").html('<option>Select Section First</option>')
-		}
-	});
+        var classID = Number($(this).val());
+        alert(classID)
+        if (classID) {
+            $.ajax({
+                type: "post",
+                url: $("meta[name='url']").attr("content") + "admin/api/load-exam",
+                data: {
+                    "sid": classID
+                },
+                success: function (data) {
+                    //console.log(data)
+                    $("#exam").html('<option disabled selected>Select Exam</option>' + data)
+                }
+            });
+        } else {
+            $("#exam").html('<option>Select Section First</option>')
+        }
+    });
 
     $("#class").change(function () {
         $('#a-info').hide();

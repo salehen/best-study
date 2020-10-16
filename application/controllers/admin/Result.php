@@ -14,7 +14,7 @@ class Result extends CI_Controller
 		$this->custom->remember_me_cookie();
 	}
 
-    public function index()
+	public function index()
 	{
 		$select = 'teachers.*, subjects.name as sname';
 		$data['title'] = 'Results';
@@ -48,119 +48,48 @@ class Result extends CI_Controller
 		$data['pages'] = $this->load->view('admin/add-result', $data, TRUE);
 		$this->load->view('admin/dashboard', $data);
 	}
-	public function admission()
+	public function examMarkSave()
 	{
-		$data['js'] = [
-			'assets/js/custom/myjs',
-			'assets/admin/js/custom/myScript'
-		];
-		$data['title'] = 'Admission';
-		$data['class'] = $this->om->view('*', 'class');
-		$data['pages'] = $this->load->view('admin/admission', $data, TRUE);
-		$this->load->view('admin/dashboard', $data);
-	}
-
-	public function admissionConfirm()
-	{
-		$data['js'] = [
-			'assets/js/custom/myjs',
-			'assets/admin/js/custom/adConfirm'
-		];
-		$data['title'] = 'Admission-Confirm';
-		$data['class'] = $this->om->view('*', 'class');
-		$data['pages'] = $this->load->view('admin/admission-confirm', $data, TRUE);
-		$this->load->view('admin/dashboard', $data);
-	}
-
-	public function admissionResult()
-	{
-		$data['js'] = [
-			'assets/admin/js/custom/adResult'
-		];
-		$this->load->helper('form');
-		$data['title'] = 'Admission-Result';
-		$data['class'] = $this->om->view('*', 'class');
-		$data['pages'] = $this->load->view('admin/admission-result', $data, TRUE);
-		$this->load->view('admin/dashboard', $data);
-	}
-
-	public function admissionResultSave()
-	{
-		$id = $this->input->post('id', true);
+		$examID = $this->input->post('examID', true);
+		$status = $this->input->post('status', true);
+		$studentID = $this->input->post('studentID', true);
 		$marks = $this->input->post('marks', true);
-		foreach ($id as $k => $v) {
-			foreach ($marks as $key => $mark) {
-				if ($k == $key) {
-					$this->om->UpdateData('admissions', ['marks' => $mark], ['id' => $v]);
+		// echo "<pre>";
+		// print_r($_POST);
+		// die();
+		if ($status != 1) {
+			foreach ($studentID as $k => $sid) {
+				foreach ($marks as $key => $mark) {
+					if ($k == $key) {
+						$data = [
+							'marks' => $mark,
+							'exam_id' => $examID,
+							'student_id' => $sid
+						];
+						$this->om->InsertData('results', $data);
+					}
 				}
 			}
-		}
-		$this->session->set_flashdata('msg', 'Admission Test Marks Update Successfully.');
-		redirect(base_url('dashboard/admission-result'), "refresh");
-	}
-
-	public function admissionSetup()
-	{
-		$this->load->helper('form');
-		$data['class'] = $this->om->view('*', 'class');
-		$data['setupList'] = $this->om->view('admission_settings.*, class.name as cname', 'admission_settings', '', '', '', ['class' => 'class.id=admission_settings.class_id']);
-		$data['title'] = 'Admission-Setup';
-		$data['pages'] = $this->load->view('admin/admission-setup', $data, TRUE);
-		$this->load->view('admin/dashboard', $data);
-	}
-
-	public function admissionSetupSave()
-	{
-		$this->load->library('form_validation');
-		$this->load->helper('form');
-
-		$this->form_validation->set_rules('class[]', 'class', 'required', array('required' => 'class Required'));
-		$this->form_validation->set_rules('start_date', 'Start Date', 'required', array('required' => 'Start Date Required'));
-		$this->form_validation->set_rules('end_date', 'End Date', 'required', array('required' => 'End Date Required'));
-		$this->form_validation->set_rules('exam_date', 'Exam Date', 'required', array('required' => 'Exam Date Required'));
-		$this->form_validation->set_rules('exam_type[]', 'Exam Type', 'required', array('required' => 'Exam Type Required'));
-
-		if ($this->form_validation->run() == false) {
-			$data['class'] = $this->om->view('*', 'class');
-			$data['setupList'] = $this->om->view('admission_settings.*, class.name as cname', 'admission_settings', '', '', '', ['class' => 'class.id=admission_settings.class_id']);
-			$data['pages'] = $this->load->view('admin/admission-setup', $data, TRUE);
-			$this->load->view('admin/dashboard', $data);
-		} else {
-			$class = $this->input->post('class', true);
-
-			if ($this->input->post('exam_type', true)) {
-				$examType = implode(", ", $this->input->post('exam_type', true));
-			} else {
-				$examType = '';
-			}
-			foreach ($class as $cl) {
-				$classChack = $this->om->view('*', 'admission_settings', ['class_id' => $cl]);
-				if ($classChack) {
-					$sdata = [
-						'class_id' => $cl,
-						'start_date' => $this->input->post('start_date', true),
-						'end_date' => $this->input->post('end_date', true),
-						'exam_type' => $examType,
-						'exam_date' => $this->input->post('exam_date', true),
-						'total_marks' => $this->input->post('total_marks', true),
-						'pass_marks' => $this->input->post('pass_marks', true),
-					];
-					$this->om->UpdateData('admission_settings', $sdata, ['class_id' => $cl]);
-				} else {
-					$sdata = [
-						'class_id' => $cl,
-						'start_date' => $this->input->post('start_date', true),
-						'end_date' => $this->input->post('end_date', true),
-						'exam_type' => $examType,
-						'exam_date' => $this->input->post('exam_date', true),
-						'total_marks' => $this->input->post('total_marks', true),
-						'pass_marks' => $this->input->post('pass_marks', true),
-					];
-					$this->om->InsertData('admission_settings', $sdata);
+			$this->om->UpdateData('exam', ['status' => 1], ['id' => $examID]);
+			$this->session->set_flashdata('msg', 'Result Inserted Successfully.');
+			redirect(base_url('dashboard/result'), "refresh");
+		} else if ($status == 1) {
+			foreach ($studentID as $k => $sid) {
+				foreach ($marks as $key => $mark) {
+					if ($mark) {
+						if ($k == $key) {
+							$data = [
+								'marks' => $mark,
+								'exam_id' => $examID,
+								'student_id' => $sid
+							];
+							$this->om->UpdateData('results', $data, ['exam_id' => $examID, 'student_id' => $sid]);
+						}
+					}
 				}
 			}
-			$this->session->set_flashdata('msg', 'Admission Setting Save Successfully.');
-			redirect(base_url('dashboard/admission-setup'), "refresh");
+			$this->session->set_flashdata('msg', 'Result Updated Successfully.');
+			redirect(base_url('dashboard/result'), "refresh");
 		}
 	}
 }

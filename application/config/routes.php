@@ -56,6 +56,9 @@ $route['translate_uri_dashes'] = FALSE;
 /*************---->Front-End-Route<----****************/
 
 $route['about'] = 'home/about';
+$route['course'] = 'home/course';
+$route['gallery'] = 'home/gallery';
+$route['contact'] = 'home/contact';
 
 //Frontend API route
 $route['api/email-check'] = 'api/checkEmail';

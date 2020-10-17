@@ -110,6 +110,7 @@ $route['admin/api/load-exam'] = 'admin/api/loadExam';
 $route['admin/api/load-exam-result'] = 'admin/api/loadExamResult';
 
 $route['admin/api/exam-mark-input'] = 'admin/api/examMarkInput';
+$route['admin/api/exam-mark-view'] = 'admin/api/examMarkView';
 
 $route['admin/api/exam'] = 'admin/api/exam';
 $route['admin/api/load-exam-subject'] = 'admin/api/examSubject';

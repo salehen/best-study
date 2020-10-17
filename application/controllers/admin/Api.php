@@ -465,4 +465,32 @@ class Api extends CI_Controller
 		}
 		echo json_encode($data);
 	}
+
+	public function examMarkView()
+	{
+		$examID = $this->input->post('examID', true);
+		if ($examID) {
+			$select = 'results.*, exam.*, exam_type.name as etname, sections.name as sec_name, subjects.name as sub_name, class.name as cname, students.id as sid, students.name as sname, students.gender, students.mobile';
+			$join = [
+				'students' => 'students.id = results.student_id',
+				'exam' => 'exam.id = results.exam_id',
+				'exam_type' => 'exam_type.id = exam.exam_type_id',
+				'sections' => 'sections.id = exam.section_id',
+				'subjects' => 'subjects.id = exam.subject_id',
+				'class' => 'class.id = sections.class_id',
+				
+			];
+			$result = $this->om->view($select, 'results', ['results.exam_id' => $examID], '', '', $join);
+			if ($result) {
+				foreach ($result as $k => $v) {
+					$data[$k] = $v;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+		echo json_encode($data);
+	}
 }

@@ -16,9 +16,21 @@ class Result extends CI_Controller
 
 	public function index()
 	{
-		$select = 'teachers.*, subjects.name as sname';
+		$data['js'] = [
+			'assets/admin/js/custom/result'
+		];
+		$tID = $this->session->userdata('id');
+		$select = 'exam.*, exam_type.name as etname, sections.name as sec_name, subjects.name as sub_name, class.name as cname, teachers.name as tname';
+		$join = [
+			'exam_type' => 'exam_type.id = exam.exam_type_id',
+			'sections' => 'sections.id = exam.section_id',
+			'subjects' => 'subjects.id = exam.subject_id',
+			'class' => 'class.id = sections.class_id',
+			'teachers' => 'teachers.id = exam.teacher_id'
+		];
+		$result = $this->om->view($select, 'exam', ['exam.teacher_id' => $tID, 'exam.status' => 1], ['exam.date', 'ASC'], '', $join);
+		$data['exam'] = $result;
 		$data['title'] = 'Results';
-		$data['teacher'] = $this->om->view($select, 'teachers', '', '', '', ['subjects' => 'subjects.id=teachers.subject_id']);
 		$data['pages'] = $this->load->view('admin/result', $data, TRUE);
 		$this->load->view('admin/dashboard', $data);
 	}

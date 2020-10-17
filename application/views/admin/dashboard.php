@@ -104,17 +104,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Teachers" href="<?php echo base_url('dashboard/teacher') ?>"><span class="mini-sub-pro">All Teachers</span></a></li>
                                 <li><a title="Add Teacher" href="<?php echo base_url('dashboard/add-teacher') ?>"><span class="mini-sub-pro">Add Teacher</span></a></li>
-                                <li><a title="Edit Professor" href="edit-professor.html"><span class="mini-sub-pro">Edit Professor</span></a></li>
-                                <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Professor Profile</span></a></li>
+                                <!-- <li><a title="Edit Professor" href="edit-professor.html"><span class="mini-sub-pro">Edit Professor</span></a></li> -->
+                                <!-- <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Professor Profile</span></a></li> -->
                             </ul>
                         </li>
                         <li>
                             <a class="has-arrow" href="<?php echo base_url("dashboard/student") ?>" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Students" href="<?php echo base_url("dashboard/student") ?>"><span class="mini-sub-pro">All Students</span></a></li>
-                                <li><a title="Add Students" href="add-student.html"><span class="mini-sub-pro">Add Student</span></a></li>
-                                <li><a title="Edit Students" href="edit-student.html"><span class="mini-sub-pro">Edit Student</span></a></li>
-                                <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li>
+                                <!-- <li><a title="Add Students" href="add-student.html"><span class="mini-sub-pro">Add Student</span></a></li> -->
+                                <!-- <li><a title="Edit Students" href="edit-student.html"><span class="mini-sub-pro">Edit Student</span></a></li> -->
+                                <!-- <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li> -->
                             </ul>
                         </li>
                         <li>
@@ -122,9 +122,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Subjects" href="<?php echo base_url("dashboard/subject") ?>"><span class="mini-sub-pro">All Subject</span></a></li>
                                 <li><a title="Add Subjects" href="<?php echo base_url("dashboard/add-subject") ?>"><span class="mini-sub-pro">Add Subject</span></a></li>
-                                <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit Course</span></a></li>
+                                <!-- <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit Course</span></a></li>
                                 <li><a title="Courses Profile" href="course-info.html"><span class="mini-sub-pro">Courses Info</span></a></li>
-                                <li><a title="Product Payment" href="course-payment.html"><span class="mini-sub-pro">Courses Payment</span></a></li>
+                                <li><a title="Product Payment" href="course-payment.html"><span class="mini-sub-pro">Courses Payment</span></a></li> -->
                             </ul>
                         </li>
                         <li>
@@ -132,7 +132,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="Class List" href="<?php echo base_url('dashboard/class-list') ?>"><span class="mini-sub-pro">Class List</span></a></li>
                                 <li><a title="Section List" href="<?php echo base_url('dashboard/section-list') ?>"><span class="mini-sub-pro">Section List</span></a></li>
-                                <li><a title="Edit Departments" href="edit-department.html"><span class="mini-sub-pro">Edit Departments</span></a></li>
+                                <!-- <li><a title="Edit Departments" href="edit-department.html"><span class="mini-sub-pro">Edit Departments</span></a></li> -->
                             </ul>
                         </li>
                         <li>

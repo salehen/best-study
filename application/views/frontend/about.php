@@ -1,9 +1,14 @@
+	<!-- banner -->
+<div class="inner_page_agile">
+
+</div>
+<!--//banner -->
 	<!-- short -->
 	<div class="services-breadcrumb">
 		<div class="inner_breadcrumb">
 			<ul class="short_ls">
 				<li>
-					<a href="index.html">Home</a>
+					<a href="<?php echo base_url() ?>">Home</a>
 					<span>| |</span>
 				</li>
 				<li>About Us</li>
@@ -32,7 +37,7 @@
 					<p>Pellentesque convallis diam consequat magna vulputate malesuada. Cras a ornare elit. Nulla viverra pharetra sem, eget
 						pulvinar neque pharetra ac.Lorem Ipsum convallis diam consequat magna vulputate malesuada. Cras a ornare elit. Nulla
 						viverra pharetra sem.</p>
-					<a class="button-style" href="join.html">Join Now</a>
+					<a class="button-style" href="<?php echo base_url('admission') ?>">Join Now</a>
 				</div>
 				<!-- Stats-->
 				<div class="col-md-6 about2-info">
@@ -239,7 +244,7 @@
 					<div class="clearfix"></div>
 				</li>
 			</ul>
-			<a class="button-style" href="join.html">Join Now</a>
+			<a class="button-style" href="<?php echo base_url('admission') ?>">Join Now</a>
 		</div>
 		<div class="pencil-img">
 			<img src="<?php echo base_url() ?>assets/images/bg5.png" alt="" />

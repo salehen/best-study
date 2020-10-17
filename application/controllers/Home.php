@@ -26,6 +26,26 @@ class Home extends CI_Controller
 		$this->load->view('master', $data);
 	}
 
+	public function course()
+	{
+		$data['title'] = 'Course';
+		$data['pages'] = $this->load->view('frontend/course', '', TRUE);
+		$this->load->view('master', $data);
+	}
+
+	public function gallery()
+	{
+		$data['title'] = 'Gallery';
+		$data['pages'] = $this->load->view('frontend/Gallery', '', TRUE);
+		$this->load->view('master', $data);
+	}
+	public function contact()
+	{
+		$data['title'] = 'Contact';
+		$data['pages'] = $this->load->view('frontend/contact', '', TRUE);
+		$this->load->view('master', $data);
+	}
+
 	public function about()
 	{
 		$data['title'] = 'About';

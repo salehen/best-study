@@ -1,4 +1,17 @@
 $("document").ready(function () {
+    
+    $(".mySearch").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#iftbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    $("#mvSearch").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#mvtbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
 
     $('body').on('click', '.marksInput', function (e) {
         e.preventDefault();
@@ -63,12 +76,64 @@ $("document").ready(function () {
     })
 
 
-    $(".mySearch").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#iftbody tr").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
+    $('body').on('click', '.marksViewBtn', function (e) {
+        e.preventDefault();
+        var examID = Number($(this).val());
+        console.log(examID);
+        if (examID) {
+            $.ajax({
+                type: "post",
+                url: $("meta[name='url']").attr("content") + "admin/api/exam-mark-view",
+                data: {
+                    'examID': examID
+                },
+                success: function (response) {
+                    // console.log(response);
+                    if (response) {
+                        response = JSON.parse(response);
+                        rtl = "";
+                        $(".mofiz").remove();
+                        $(".no-data").remove();
+                        for (var index in response) {
+                            if (response[index]['gender'] == 1) {
+                                gender = 'Male';
+                            } else if (response[index]['gender'] == 2) {
+                                gender = 'Female';
+                            } else {
+                                gender = 'Other';
+                            }
+                            rtl += "<tr class='mofiz' salehen='" + response[index]['sid'] + "'>";
+                            rtl += "<td>" + response[index]['sid'] + "</td>";
+                            rtl += "<td>" + response[index]['sname'] + "</td>";
+                            rtl += "<td>" + response[index]['cname'] + "</td>";
+                            rtl += "<td>" + response[index]['sec_name'] + "</td>";
+                            rtl += "<td>" + response[index]['sub_name'] + "</td>";                            
+                            rtl += "<td>" + gender + "</td>";
+                            rtl += "<td>" + response[index]['etname'] + "</td>";
+                            rtl += "<td>" + response[index]['date'] + "</td>";
+                            rtl += "<td>" + response[index]['marks'] + "</td>";
+                            rtl += "</tr>";
+                        }
+                        $('#a-info').hide();
+                        $('#marksView').show();
+                        $("#mvtbody").append(rtl);
+                    } else {
+                        $('#errorMsg').show();
+                        $(".mofiz").remove();
+                        $(".no-data").remove();
+                        $("#errorMsg").append("<p class='alert-success text-center no-data'><b>No Student Found</b></p>");
+                    }
+                }
+            });
+        } else {
+            $('#errorMsg').show();
+            $(".mofiz").remove();
+            $(".no-data").remove();
+            $("#errorMsg").append("<p class='alert-success text-center no-data'><b>No Student Found</b></p>");
+        }
+    })
+
+
 
 
     $("#section").change(function () {
